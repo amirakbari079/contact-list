@@ -10,11 +10,13 @@ const AddContact = () => {
             <input type="text" />
             <p className="inputTitle">Phone</p>
             <input type="text" />
-            <input type="submit" value="Add" />
+            <div className="addBtnContainer">
+            <button className="addBtn">Add</button>
+            </div>
           </form>
         </section>
         <section className="imageContainer">
-        <img src={first}  width="150" height="160" className="image"/>
+        <img src={first}  width="180" height="190" className="image"/>
         </section>
       </div>
     </div>
