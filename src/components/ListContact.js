@@ -1,30 +1,44 @@
-const ListContact = () => {
-    return (
-        <div className="listContainer">
-           <div className="list">preson1</div>
-           <div className="list">preson2</div>
-           <div className="list">preson3</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-           <div className="list">preson4</div>
-        </div>
-    )
-}
+import { Link } from "react-router-dom";
 
-export default ListContact
+const ListContact = ({ contacts, onDelete,onEdite }) => {
+  return (
+    <div className="listContainer">
+      <div className="list">
+        <h3>Contact List</h3>
+        <input type="search" placeholder="search..."/>
+      </div>
+     
+
+      {contacts.map((contact) => {
+        const { name, phone, id } = contact;
+        return (
+          <div className="contactList"  key={id} >
+            <img
+              src={contact.contactImage}
+              width={50}
+              height={50}
+              className="contactImageList"
+              alt="img"
+            />
+            <div className="list">
+              <p className="listText">{name} </p>
+              <p className="listText">{phone}</p>
+              <div>
+              <Link to={`/edite/${id}`}>
+              <button className="editeBtn" onClick={()=>onEdite(id)}>
+                Edite
+              </button>
+              </Link>
+              <button className="removeBtn" onClick={() => onDelete(id)}>
+                Delete
+              </button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default ListContact;
