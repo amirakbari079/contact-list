@@ -12,7 +12,9 @@ import EditeContact from "./components/EditeContact";
 function App() {
   const [contacts, setContacts] = useState([]);
   const [editeContacts, setEditeContacts] = useState({});
-
+  const [searchTerm, setSearchTerm] = useState([]);
+  const [allContacts, setAllContacts] = useState(null);
+  
   const addContactHnadler = async (contact, contactImage) => {
     console.log("addContactHandler");
     try {
@@ -20,6 +22,7 @@ function App() {
         ...contacts,
         { id: Math.ceil(Math.random() * 100), ...contact, contactImage },
       ]);
+      setAllContacts(contacts);
       console.log("contacts");
       console.log(contacts);
       // await addOneContact(contacts)
@@ -51,8 +54,23 @@ function App() {
     const item = contacts.filter((q) => q.id === id);
     item[0].name = editeContacts.name;
     item[0].phone = editeContacts.phone;
-
   };
+
+  const changeHnadler=(e)=>{
+    setSearchTerm(e.target.value)
+    const search=e.target.value;
+    if(search!==null){
+      const filteredContacts=allContacts.filter(c=>{
+        return Object.values(c).join(" ").toLowerCase().includes(search.toLowerCase())
+      })
+      console.log("filteredContacts")
+      console.log(filteredContacts)
+      setContacts(filteredContacts)
+    }else{
+      setContacts(allContacts)
+    }
+
+  }
   return (
     <div className="App">
       <div className="whiteContainer">
@@ -69,6 +87,7 @@ function App() {
                   contacts={contacts}
                   onDelete={deleteContactHandler}
                   onEdite={editeContactHandler}
+                  changeHnadler={changeHnadler}
                 />
               }
             />

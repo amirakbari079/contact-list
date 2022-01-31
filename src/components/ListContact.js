@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 
-const ListContact = ({ contacts, onDelete,onEdite }) => {
+
+const ListContact = ({ contacts, onDelete,onEdite,changeHnadler }) => {
+
+
+
+
   return (
     <div className="listContainer">
       <div className="list">
         <h3>Contact List</h3>
-        <input type="search" placeholder="search..."/>
+        <input type="search" placeholder="search..." onChange={changeHnadler}/>
       </div>
      
 
